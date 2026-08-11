@@ -4,25 +4,21 @@ import driver from "@/lib/db";
 export const dynamic = "force-dynamic";
 
 export async function GET() {
-  const start = performance.now();
+  const t0 = performance.now();
+  const session = driver.session();
   try {
-    const session = driver.session();
-    try {
-      await session.run("RETURN 1 AS ok");
-      const elapsed = (performance.now() - start).toFixed(2);
-      return NextResponse.json(
-        { status: "ok", queryTimeMs: `${elapsed}ms` },
-        { headers: { "X-Query-Time-Ms": elapsed } }
-      );
-    } finally {
-      await session.close();
-    }
-  } catch (err) {
-    const message =
-      err instanceof Error ? err.message : "Unknown database error";
+    await session.run("RETURN 1");
+    const ms = (performance.now() - t0).toFixed(2);
     return NextResponse.json(
-      { status: "error", error: "database_unreachable", message },
+      { status: "ok", latencyMs: Number(ms) },
+      { headers: { "X-Query-Time-Ms": ms } }
+    );
+  } catch (err) {
+    return NextResponse.json(
+      { status: "error", message: (err as Error).message },
       { status: 503 }
     );
+  } finally {
+    await session.close();
   }
 }
