@@ -18,19 +18,7 @@
 
 ---
 
-## 2. xAI Design System Implementation
-
-PathForge strictly implements the **xAI design system specification** (`DESIGN.md`):
-
-- **Strict Canvas Background**: `#0a0a0a` near-black canvas with clean hairline dividers (no neon gradients or cluttered background noise).
-- **Hairline Specular Cards**: `#191919` charcoal card fill (`card-xai`) bounded by 1px `#212327` hairline borders.
-- **Display Typography**: Universal Sans / Inter `font-weight: 400` headlines with negative tracking (`letter-spacing: -0.03em`) and pure white text (`#ffffff`).
-- **Code-Comment Eyebrows**: Uppercase `GeistMono` captions formatted as code comments (`{"// GRAPH INTELLIGENCE ENGINE"}`).
-- **Interactive Outline Pills**: All buttons, links, and quick chips use xAI `rounded-full` outline pills (`btn-xai-outline` and `btn-xai-primary`).
-
----
-
-## 3. Why a Graph Database?
+## 2. Why a Graph Database?
 
 A relational database models this domain as a `contributions(person_id, repo_id)` join table. Two fundamental categories of queries break down in SQL:
 
@@ -53,7 +41,7 @@ ORDER BY strength DESC
 
 ---
 
-## 4. Data Model
+## 3. Data Model
 
 ### Nodes & Properties
 - **`(:Person)`**: `login` (unique key), `name`, `avatarUrl`, `bio`, `company`, `location`, `followers`, `githubUrl`
@@ -73,7 +61,7 @@ CREATE INDEX repo_fullname_idx IF NOT EXISTS FOR (r:Repository) ON (r.fullName);
 
 ---
 
-## 5. Main Cypher Queries Explained
+## 4. Main Cypher Queries Explained
 
 All Cypher queries run through `neo4j-driver` using **100% parameterized queries** (`session.run(cypher, params)`). No string-concatenated Cypher is used anywhere in the codebase.
 
@@ -118,7 +106,7 @@ LIMIT $limit
 
 ---
 
-## 6. Setup & Local Run Instructions
+## 5. Setup & Local Run Instructions
 
 ### Prerequisites
 - Node.js 18+
@@ -147,7 +135,7 @@ npm run build
 
 ---
 
-## 7. License & Submission
+## 6. License & Submission
 
 Submitted for **Wexa AI Take-Home Assignment 2**.  
 Built by **Utsav** using **CognoDB Cloud** and **Next.js**.
