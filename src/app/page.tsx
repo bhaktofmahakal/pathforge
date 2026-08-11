@@ -66,24 +66,24 @@ export default function HomePage() {
   };
 
   return (
-    <div className="min-h-[88vh] flex flex-col justify-center px-4 py-12 bg-mesh-grid">
+    <div className="min-h-[85vh] flex flex-col justify-center px-4 py-12 bg-mesh-grid">
       {/* Hero Header */}
       <div className="text-center mb-10 max-w-4xl mx-auto">
-        <div className="badge-mint mb-5">
-          <span className="w-1.5 h-1.5 rounded-full bg-[#00f2fe] animate-pulse" />
-          Graph Intelligence Platform
+        <div className="inline-flex items-center gap-2 px-3.5 py-1 rounded-full bg-[#22d3ee]/10 border border-[#22d3ee]/30 text-xs font-mono tracking-widest text-[#22d3ee] uppercase mb-6 shadow-[0_0_12px_rgba(34,211,238,0.15)]">
+          <span className="w-1.5 h-1.5 rounded-full bg-[#22d3ee] animate-pulse" />
+          <span>GRAPH INTELLIGENCE PLATFORM</span>
         </div>
 
-        <h1 className="text-3xl sm:text-6xl font-extrabold tracking-tight mb-4 leading-tight text-white">
+        <h1 className="text-4xl sm:text-6xl md:text-7xl font-extrabold tracking-tight mb-5 leading-none text-white">
           Open-Source Contributor{" "}
-          <span className="bg-gradient-to-r from-[#00f2fe] via-[#38ef7d] to-[#6366f1] bg-clip-text text-transparent">
-            Connection Graph
+          <span className="bg-gradient-to-r from-[#22d3ee] via-[#38ef7d] to-[#818cf8] bg-clip-text text-transparent">
+            Graph Engine
           </span>
         </h1>
 
-        <p className="text-slate-400 text-sm sm:text-base max-w-2xl mx-auto leading-relaxed">
-          Map multi-hop collaboration paths across 620+ open-source maintainers and 25 core repositories.
-          Identify bridge contributors, degree centrality leaders, and network repo recommendations.
+        <p className="text-slate-400 text-sm sm:text-base max-w-2xl mx-auto leading-relaxed font-normal">
+          Traverse multi-hop collaboration paths across 620+ open-source maintainers and 25 core repositories.
+          Powered by a managed CognoDB Cloud openCypher graph database.
         </p>
       </div>
 
@@ -104,8 +104,8 @@ export default function HomePage() {
               setShowSuggestions(true);
             }}
             onFocus={() => setShowSuggestions(true)}
-            placeholder="Search maintainer by username (e.g. antfu, jridgewell)..."
-            className="input-cognodb pl-11 pr-11 py-3.5 text-sm"
+            placeholder="Search maintainer by handle (e.g. antfu, jridgewell)..."
+            className="input-cognodb pl-11 pr-11 py-3.5 text-sm font-mono tracking-wide"
             autoFocus
           />
 
@@ -118,18 +118,18 @@ export default function HomePage() {
 
         {/* Typeahead Suggestions */}
         {showSuggestions && suggestions.length > 0 && (
-          <div className="absolute top-full mt-2 w-full card-cognodb overflow-hidden z-50 border-[#00f2fe]/40">
+          <div className="absolute top-full mt-2 w-full card-cognodb overflow-hidden z-50 border-[#22d3ee]/40 shadow-2xl">
             {suggestions.map((person) => (
               <button
                 key={person.login}
                 type="button"
                 onClick={() => handleSelect(person.login)}
-                className="w-full flex items-center gap-3 px-4 py-3 hover:bg-white/10 transition-colors text-left border-b border-white/5 last:border-0"
+                className="w-full flex items-center gap-3 px-4 py-3 hover:bg-[#22d3ee]/10 transition-colors text-left border-b border-white/5 last:border-0"
               >
                 <img src={person.avatarUrl} alt="" className="w-8 h-8 rounded-full border border-white/10 object-cover" />
                 <div>
-                  <div className="text-sm font-semibold text-white">{person.name}</div>
-                  <div className="text-xs text-slate-400 font-mono">@{person.login}</div>
+                  <div className="text-sm font-bold text-white">{person.name}</div>
+                  <div className="text-xs text-[#22d3ee] font-mono">@{person.login}</div>
                 </div>
               </button>
             ))}
@@ -139,52 +139,52 @@ export default function HomePage() {
 
       {/* Featured Contributor Chips */}
       <div className="flex flex-wrap items-center justify-center gap-2 mb-12 max-w-3xl mx-auto">
-        <span className="text-xs text-slate-500 font-medium mr-1">Maintainer Shortcuts:</span>
+        <span className="text-xs text-slate-500 font-mono tracking-wider uppercase mr-1">Shortcuts:</span>
         {FEATURED_CONTRIBUTORS.map((c) => (
           <button
             key={c.login}
             onClick={() => router.push(`/person/${c.login}`)}
-            className="px-3 py-1 rounded-full bg-white/5 hover:bg-[#00f2fe]/10 border border-white/10 hover:border-[#00f2fe]/40 text-xs text-slate-300 hover:text-[#00f2fe] transition-all flex items-center gap-1.5 font-mono"
+            className="px-3.5 py-1 rounded-full bg-white/5 hover:bg-[#22d3ee]/15 border border-white/15 hover:border-[#22d3ee]/50 text-xs text-slate-300 hover:text-[#22d3ee] transition-all flex items-center gap-1.5 font-mono shadow-sm"
           >
-            <span className="w-1.5 h-1.5 rounded-full bg-[#00f2fe]" />
+            <span className="w-1.5 h-1.5 rounded-full bg-[#22d3ee]" />
             @{c.login}
           </button>
         ))}
       </div>
 
       {/* Feature Action Cards */}
-      <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 max-w-4xl w-full mx-auto mb-12">
+      <div className="grid grid-cols-1 sm:grid-cols-3 gap-5 max-w-4xl w-full mx-auto mb-12">
         <FeatureCard
           title="Shortest Path Finder"
           description="Traverse up to 6 hops connecting any two maintainers via shared co-authorships"
           href="/path?from=antfu&to=jridgewell"
-          badgeText="Graph Traversal"
+          badgeText="TRAVERSAL"
           iconPath="M13.828 10.172a4 4 0 00-5.656 0l-4 4a4 4 0 105.656 5.656l1.102-1.101m-.758-4.899a4 4 0 005.656 0l4-4a4 4 0 00-5.656-5.656l-1.1 1.1"
         />
 
         <FeatureCard
           title="Bridge Connectors"
           description="Discover 2-hop mutual collaborators who can introduce you to a maintainer"
-          href="/connect?me=timneutkens&target=eps1lon"
-          badgeText="Mutual Network"
+          href="/connect?me=gaearon&target=jridgewell"
+          badgeText="CONNECTORS"
           iconPath="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z"
         />
 
         <FeatureCard
           title="Repo Recommendations"
           description="Get personalized repository recommendations based on network graph topology"
-          href="/recommend?login=antfu"
-          badgeText="Graph Traversal"
+          href="/recommend?login=eps1lon"
+          badgeText="RECOMMEND"
           iconPath="M19.428 15.428a2 2 0 00-1.022-.547l-2.387-.477a6 6 0 00-3.86.517l-.318.158a6 6 0 01-3.86.517L5.6 15.12a2 2 0 00-1.194.137l-1.636.728A2 2 0 001.5 17.828v1.172A2 2 0 003.5 21h17a2 2 0 002-2v-1.172a2 2 0 00-1.272-1.856l-1.8-1.544z"
         />
       </div>
 
       {/* CognoDB Telemetry Stats Dashboard */}
       <div className="grid grid-cols-2 md:grid-cols-4 gap-4 max-w-4xl w-full mx-auto">
-        <StatCard value="649" label="Nodes" sublabel="25 Repos · 624 People" color="text-white" />
-        <StatCard value="9,539" label="Relationships" sublabel="8.8k Co-Authorships" color="text-[#00f2fe]" />
-        <StatCard value="129 MB" label="Storage Used" sublabel="CognoDB Cloud Free" color="text-[#38ef7d]" />
-        <StatCard value="0.20ms" label="Avg Query Latency" sublabel="Bolt Protocol" color="text-[#818cf8]" />
+        <StatCard value="649" label="Graph Nodes" sublabel="25 Repos · 624 People" color="text-white" />
+        <StatCard value="9,539" label="Relationships" sublabel="8.8k Co-Authorships" color="text-[#22d3ee]" />
+        <StatCard value="129 MB" label="Storage Footprint" sublabel="CognoDB Cloud Free" color="text-[#34d399]" />
+        <StatCard value="0.20ms" label="Avg openCypher Time" sublabel="Bolt Protocol" color="text-[#818cf8]" />
       </div>
     </div>
   );
@@ -204,25 +204,27 @@ function FeatureCard({
   iconPath: string;
 }) {
   return (
-    <Link href={href} className="card-cognodb p-5 flex flex-col justify-between group">
+    <Link href={href} className="card-cognodb p-6 flex flex-col justify-between group">
       <div>
         <div className="flex items-center justify-between mb-4">
-          <div className="w-9 h-9 rounded-lg bg-[#00f2fe]/10 border border-[#00f2fe]/20 flex items-center justify-center text-[#00f2fe] group-hover:scale-105 transition-transform">
-            <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+          <div className="w-10 h-10 rounded-full bg-[#22d3ee]/10 border border-[#22d3ee]/30 flex items-center justify-center text-[#22d3ee] group-hover:scale-105 transition-transform shadow-[0_0_12px_rgba(34,211,238,0.15)]">
+            <svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.75} d={iconPath} />
             </svg>
           </div>
-          <span className="badge-mint !text-[10px]">{badgeText}</span>
+          <span className="px-2.5 py-0.5 rounded-full text-[10px] font-mono tracking-widest text-[#22d3ee] bg-[#22d3ee]/10 border border-[#22d3ee]/30 uppercase">
+            {badgeText}
+          </span>
         </div>
 
-        <h3 className="text-base font-bold text-white mb-1.5 group-hover:text-[#00f2fe] transition-colors">
+        <h3 className="text-base font-bold text-white mb-2 group-hover:text-[#22d3ee] transition-colors">
           {title}
         </h3>
         <p className="text-xs text-slate-400 leading-relaxed font-normal">{description}</p>
       </div>
 
-      <div className="flex items-center gap-1 text-xs text-[#00f2fe] font-bold mt-5 group-hover:translate-x-1 transition-transform">
-        <span>Explore Graph</span>
+      <div className="flex items-center gap-1.5 text-xs text-[#22d3ee] font-mono font-bold mt-6 group-hover:translate-x-1 transition-transform">
+        <span>EXPLORE GRAPH</span>
         <svg className="w-3.5 h-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
           <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M14 5l7 7m0 0l-7 7m7-7H3" />
         </svg>
@@ -243,9 +245,9 @@ function StatCard({
   color: string;
 }) {
   return (
-    <div className="card-cognodb p-4 text-center">
-      <div className={`text-2xl font-black ${color} tracking-tight font-mono mb-0.5`}>{value}</div>
-      <div className="text-xs font-bold text-slate-200">{label}</div>
+    <div className="card-cognodb p-5 text-center">
+      <div className={`text-2xl font-black ${color} tracking-tight font-mono mb-1`}>{value}</div>
+      <div className="text-xs font-bold text-slate-200 uppercase tracking-wider font-mono">{label}</div>
       <div className="text-[10px] text-slate-500 font-mono mt-0.5">{sublabel}</div>
     </div>
   );

@@ -36,11 +36,13 @@ export default function LeaderboardPage() {
     <div className="container-narrow">
       {/* Header */}
       <div className="mb-8 max-w-2xl">
-        <div className="badge-mint mb-3">Degree Centrality Ranking</div>
-        <h1 className="text-2xl sm:text-4xl font-black text-white mb-2 tracking-tight">
+        <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-[#22d3ee]/10 border border-[#22d3ee]/30 text-xs font-mono tracking-widest text-[#22d3ee] uppercase mb-4 shadow-[0_0_12px_rgba(34,211,238,0.15)]">
+          <span>DEGREE CENTRALITY RANKING</span>
+        </div>
+        <h1 className="text-3xl sm:text-5xl font-extrabold text-white mb-3 tracking-tight leading-none">
           Most-Connected Maintainers
         </h1>
-        <p className="text-slate-400 text-xs sm:text-sm leading-relaxed">
+        <p className="text-slate-400 text-xs sm:text-sm leading-relaxed font-normal">
           Contributors ranked by the volume of unique co-authors they share across all 25 core open-source repositories in the connection graph.
         </p>
       </div>
@@ -61,27 +63,27 @@ export default function LeaderboardPage() {
                   title="Rank #1 · Centrality Leader"
                   person={list[0]}
                   accentBg="bg-gradient-to-b from-amber-400/10 to-transparent"
-                  borderColor="border-amber-400/50 hover:border-amber-400"
+                  borderColor="border-amber-400/50 hover:border-amber-400 shadow-[0_0_20px_rgba(251,191,36,0.1)]"
                   ringColor="border-amber-400"
                   rankTag="bg-amber-400/15 text-amber-300 border-amber-400/40"
                   badgeText="76 Direct Co-Authors"
                 />
                 <PodiumCard
                   rank={2}
-                  title="Rank #2 · Co-Author Network"
+                  title="Rank #2 · Network Core"
                   person={list[1]}
                   accentBg="bg-gradient-to-b from-slate-300/10 to-transparent"
-                  borderColor="border-slate-300/40 hover:border-slate-300"
+                  borderColor="border-slate-300/40 hover:border-slate-300 shadow-[0_0_20px_rgba(203,213,225,0.1)]"
                   ringColor="border-slate-300"
                   rankTag="bg-slate-300/15 text-slate-200 border-slate-300/40"
                   badgeText="74 Direct Co-Authors"
                 />
                 <PodiumCard
                   rank={3}
-                  title="Rank #3 · Co-Author Network"
+                  title="Rank #3 · Network Core"
                   person={list[2]}
                   accentBg="bg-gradient-to-b from-amber-600/10 to-transparent"
-                  borderColor="border-amber-600/40 hover:border-amber-600"
+                  borderColor="border-amber-600/40 hover:border-amber-600 shadow-[0_0_20px_rgba(217,119,6,0.1)]"
                   ringColor="border-amber-600"
                   rankTag="bg-amber-600/15 text-amber-400 border-amber-600/40"
                   badgeText="66 Direct Co-Authors"
@@ -91,11 +93,11 @@ export default function LeaderboardPage() {
 
             {/* Complete Rankings Table */}
             <div className="space-y-3">
-              <div className="flex items-center justify-between">
-                <h2 className="text-xs font-bold text-slate-400 uppercase tracking-wider font-mono">
-                  Complete Network Centrality Ranks (Top 25)
+              <div className="flex items-center justify-between card-cognodb px-5 py-3.5 border border-[#22d3ee]/30">
+                <h2 className="text-xs font-bold text-white uppercase tracking-widest font-mono">
+                  COMPLETE NETWORK CENTRALITY RANKS (TOP 25)
                 </h2>
-                <div className="text-xs text-slate-500 font-mono">
+                <div className="text-xs text-[#22d3ee] font-mono">
                   Metric: Unique Co-Authorships
                 </div>
               </div>
@@ -105,12 +107,12 @@ export default function LeaderboardPage() {
                 return (
                   <div
                     key={person.login}
-                    className="card-cognodb p-4 flex flex-col sm:flex-row sm:items-center justify-between gap-4 group"
+                    className="card-cognodb p-4.5 flex flex-col sm:flex-row sm:items-center justify-between gap-4 group border border-white/10 hover:border-[#22d3ee]/40 shadow-md"
                   >
                     {/* Left: Rank, Avatar & Info */}
                     <div className="flex items-center gap-3.5 min-w-0 sm:w-2/5">
                       <div
-                        className={`w-7 h-7 sm:w-8 sm:h-8 rounded-lg flex items-center justify-center font-bold text-xs flex-shrink-0 border font-mono ${
+                        className={`w-8 h-8 rounded-full flex items-center justify-center font-bold text-xs flex-shrink-0 border font-mono ${
                           index === 0
                             ? "bg-amber-400/20 text-amber-300 border-amber-400/40"
                             : index === 1
@@ -132,11 +134,11 @@ export default function LeaderboardPage() {
                       <div className="min-w-0 flex-1">
                         <Link
                           href={`/person/${person.login}`}
-                          className="font-bold text-sm text-white hover:text-[#00f2fe] transition-colors block truncate"
+                          className="font-bold text-sm text-white hover:text-[#22d3ee] transition-colors block truncate"
                         >
                           {person.name}
                         </Link>
-                        <div className="text-xs text-slate-400 font-mono truncate">
+                        <div className="text-xs text-[#22d3ee] font-mono truncate">
                           @{person.login} {person.company ? `· ${person.company}` : ""}
                         </div>
                       </div>
@@ -145,12 +147,12 @@ export default function LeaderboardPage() {
                     {/* Center: Centrality Score Bar */}
                     <div className="flex-1 max-w-xs w-full">
                       <div className="flex justify-between items-center text-[10px] font-mono text-slate-400 mb-1">
-                        <span>Centrality Rating</span>
-                        <span className="text-[#00f2fe] font-bold">{percent}%</span>
+                        <span>CENTRALITY RATING</span>
+                        <span className="text-[#22d3ee] font-bold">{percent}%</span>
                       </div>
                       <div className="w-full bg-white/5 rounded-full h-2 overflow-hidden border border-white/5">
                         <div
-                          className="bg-gradient-to-r from-[#00f2fe] to-[#38ef7d] h-full rounded-full transition-all duration-500"
+                          className="bg-gradient-to-r from-[#22d3ee] to-[#34d399] h-full rounded-full transition-all duration-500"
                           style={{ width: `${percent}%` }}
                         />
                       </div>
@@ -159,16 +161,16 @@ export default function LeaderboardPage() {
                     {/* Right: Metrics & Action */}
                     <div className="flex items-center justify-between sm:justify-end gap-4 flex-shrink-0 pt-2 sm:pt-0 border-t sm:border-0 border-white/5">
                       <div className="text-left sm:text-right font-mono">
-                        <div className="text-sm font-bold text-[#00f2fe]">
+                        <div className="text-sm font-bold text-[#22d3ee]">
                           {person.connections}
                         </div>
                         <div className="text-[10px] text-slate-500 uppercase tracking-wider font-medium">
-                          co-authors
+                          CO-AUTHORS
                         </div>
                       </div>
 
-                      <Link href={`/person/${person.login}`} className="btn-dark-secondary text-xs">
-                        Profile
+                      <Link href={`/person/${person.login}`} className="btn-dark-secondary !rounded-full !px-4 !py-1.5 text-xs font-mono">
+                        PROFILE
                       </Link>
                     </div>
                   </div>
@@ -202,10 +204,10 @@ function PodiumCard({
   badgeText: string;
 }) {
   return (
-    <div className={`card-cognodb p-6 border ${borderColor} ${accentBg} flex flex-col items-center justify-between text-center relative overflow-hidden group`}>
+    <div className={`card-cognodb p-6 border ${borderColor} ${accentBg} flex flex-col items-center justify-between text-center relative overflow-hidden group shadow-xl`}>
       {/* Rank Badge Header */}
-      <div className={`px-3 py-1 rounded-full text-xs font-bold font-mono border ${rankTag} mb-4 flex items-center gap-1.5`}>
-        <span>#{rank} {rankTag.includes("yellow") ? "Gold" : rankTag.includes("slate") ? "Silver" : "Bronze"}</span>
+      <div className={`px-3.5 py-1 rounded-full text-xs font-bold font-mono border ${rankTag} mb-4 flex items-center gap-1.5`}>
+        <span>#{rank} {rankTag.includes("amber-400") ? "Gold" : rankTag.includes("slate") ? "Silver" : "Bronze"}</span>
         <span>·</span>
         <span>{badgeText}</span>
       </div>
@@ -223,28 +225,28 @@ function PodiumCard({
       <div className="mb-4 w-full">
         <Link
           href={`/person/${person.login}`}
-          className="font-extrabold text-base sm:text-lg text-white hover:text-[#00f2fe] transition-colors truncate block"
+          className="font-extrabold text-base sm:text-lg text-white hover:text-[#22d3ee] transition-colors truncate block"
         >
           {person.name}
         </Link>
-        <div className="text-xs text-slate-400 font-mono truncate">
+        <div className="text-xs text-[#22d3ee] font-mono truncate">
           @{person.login} · <span className="text-slate-500 font-sans">{title}</span>
         </div>
       </div>
 
       {/* Metric Box */}
-      <div className="w-full bg-white/5 rounded-xl p-3.5 border border-white/10 mb-4">
-        <div className="text-2xl font-black text-[#00f2fe] font-mono mb-0.5">
+      <div className="w-full bg-white/5 rounded-2xl p-3.5 border border-white/10 mb-4">
+        <div className="text-2xl font-black text-[#22d3ee] font-mono mb-0.5">
           {person.connections}
         </div>
-        <div className="text-[10px] text-slate-400 font-bold uppercase tracking-wider">
-          Direct Co-Authors
+        <div className="text-[10px] text-slate-400 font-bold uppercase tracking-widest font-mono">
+          DIRECT CO-AUTHORS
         </div>
       </div>
 
       {/* Action Button */}
-      <Link href={`/person/${person.login}`} className="btn-dark-secondary text-xs w-full text-center">
-        Explore Network
+      <Link href={`/person/${person.login}`} className="btn-dark-secondary !rounded-full !py-2 text-xs font-mono w-full text-center hover:border-[#22d3ee]">
+        EXPLORE NETWORK
       </Link>
     </div>
   );
