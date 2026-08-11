@@ -5,14 +5,29 @@
 
 ---
 
-## 1. Overview & Use Case
+## 🎯 Product Use Case: What is PathForge Used For?
 
-**PathForge** maps how open-source contributors are connected through shared repositories on GitHub. It answers questions like *"How am I (or how is anyone) connected to anyone else in the open-source network?"* — acting like LinkedIn's *"How you're connected"* feature, built specifically for open-source engineering networks.
+### The Problem
+In open-source software development, reaching key maintainers (e.g. core maintainers of React, Vite, Next.js, or Babel) is difficult. Traditional developer platforms like GitHub display repositories and star counts, but they **cannot answer multi-hop network questions**:
+- *"How am I connected to a maintainer I want to reach?"*
+- *"Who in my network has co-authored code with both me and them to give me a warm introduction?"*
+- *"What repositories are people 1–2 hops out in my developer graph contributing to that I haven't discovered yet?"*
 
-### Core Features
-- 🔍 **Contributor Search & Profiles**: Typeahead search over 620+ open-source contributors with commit counts, company, location, and bio.
-- 🔗 **Shortest Connection Path**: 2+ hop graph traversal finding the shortest collaboration chain between any two contributors, rendered via a workflow node pipeline.
-- 🤝 **Bridge Connectors ("Who Can Introduce Me")**: Ranks 2-hop mutual collaborators who can introduce you to a target contributor you want to reach.
+### The Solution: LinkedIn's "How You're Connected" for Open Source
+**PathForge** is an open-source contributor graph intelligence platform. It maps 620+ maintainers and 25 core repositories into a graph database to power 4 core real-world developer workflows:
+
+1. 🤝 **Warm Introductions (Bridge Connectors)**: Want an intro to a target maintainer? PathForge finds 2-hop mutual collaborators who have co-authored code with both of you and ranks them by follower influence.
+2. 🔗 **Shortest Collaboration Path (Multi-hop Traversal)**: Finds the exact chain of shared repository contributions connecting any two developers across 1 to 6 hops, visualized as a workflow node pipeline.
+3. 🚀 **Graph-Based Repository Discovery**: Recommends repositories being built 1–2 hops out in your collaboration network, superior to generic star-count rankings.
+4. 🏆 **Network Centrality Leaderboard**: Identifies key open-source ecosystem maintainers ranked by degree centrality across shared repositories.
+
+---
+
+## 1. Overview & Core Features
+
+- 🔍 **Contributor Search & Profiles**: Typeahead search over 620+ open-source contributors with commit counts, company, location, bio, and real GitHub follower counts.
+- 🔗 **Shortest Connection Path**: 2+ hop graph traversal finding the shortest collaboration chain between any two contributors.
+- 🤝 **Bridge Connectors ("Who Can Introduce Me")**: Ranks 2-hop mutual collaborators who can introduce you to a target contributor.
 - 🚀 **Graph Repo Recommendations**: Recommends open-source repositories based on 1..2 hop network collaboration paths.
 - 🏆 **Most-Connected Leaderboard**: Ranks top contributors by network degree centrality on shared repository co-authorships.
 
