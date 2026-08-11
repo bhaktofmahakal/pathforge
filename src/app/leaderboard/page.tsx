@@ -1,3 +1,4 @@
+/* eslint-disable @next/next/no-img-element */
 "use client";
 
 import { useEffect, useState } from "react";
@@ -203,8 +204,10 @@ function PodiumCard({
   return (
     <div className={`card-cognodb p-6 border ${borderColor} ${accentBg} flex flex-col items-center justify-between text-center relative overflow-hidden group`}>
       {/* Rank Badge Header */}
-      <div className={`px-3 py-1 rounded-full text-xs font-bold font-mono border ${rankTag} mb-4`}>
-        #{rank} Podium
+      <div className={`px-3 py-1 rounded-full text-xs font-bold font-mono border ${rankTag} mb-4 flex items-center gap-1.5`}>
+        <span>#{rank} {rankTag.includes("yellow") ? "Gold" : rankTag.includes("slate") ? "Silver" : "Bronze"}</span>
+        <span>·</span>
+        <span>{badgeText}</span>
       </div>
 
       {/* Maintainer Avatar with Ring */}
@@ -225,7 +228,7 @@ function PodiumCard({
           {person.name}
         </Link>
         <div className="text-xs text-slate-400 font-mono truncate">
-          @{person.login}
+          @{person.login} · <span className="text-slate-500 font-sans">{title}</span>
         </div>
       </div>
 

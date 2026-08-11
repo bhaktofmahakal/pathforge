@@ -1,5 +1,5 @@
 import driver from "./db";
-import neo4j, { Integer, Node as Neo4jNode, Path as Neo4jPath, Relationship as Neo4jRelationship } from "neo4j-driver";
+import neo4j, { Integer, Path as Neo4jPath } from "neo4j-driver";
 
 /* ─── Interfaces ─── */
 
