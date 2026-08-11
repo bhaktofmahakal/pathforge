@@ -15,7 +15,7 @@ const QUICK_CONNECTS = [
 
 export default function ConnectPage() {
   return (
-    <Suspense fallback={<div className="container-narrow text-center text-slate-400 text-sm font-mono py-12">Loading connector finder…</div>}>
+    <Suspense fallback={<div className="container-narrow text-center text-[#7d8187] text-sm font-mono">{"// LOADING CONNECTORS..."}</div>}>
       <ConnectContent />
     </Suspense>
   );
@@ -90,24 +90,24 @@ function ConnectContent() {
   return (
     <div className="container-narrow">
       {/* Header */}
-      <div className="mb-6 sm:mb-8 max-w-2xl">
-        <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-[#22d3ee]/10 border border-[#22d3ee]/30 text-xs font-mono tracking-widest text-[#22d3ee] uppercase mb-4 shadow-[0_0_12px_rgba(34,211,238,0.15)]">
-          <span>MUTUAL CONNECTIONS GRAPH</span>
+      <div className="mb-8 max-w-2xl">
+        <div className="eyebrow-mono text-[#7d8187] mb-3">
+          {"// MUTUAL CONNECTIONS GRAPH"}
         </div>
-        <h1 className="text-3xl sm:text-5xl font-extrabold text-white mb-3 tracking-tight leading-none">
+        <h1 className="text-3xl sm:text-5xl font-normal text-white mb-3 tracking-[-0.03em] leading-tight">
           Bridge Connectors
         </h1>
-        <p className="text-slate-400 text-xs sm:text-sm leading-relaxed font-normal">
+        <p className="text-[#dadbdf] text-sm leading-relaxed font-normal">
           Find 2-hop mutual collaborators who can introduce you to any target maintainer in the open-source graph.
         </p>
       </div>
 
       {/* Input Form */}
-      <div className="card-cognodb p-6 sm:p-7 mb-8 border border-white/10 shadow-2xl">
+      <div className="card-xai p-6 sm:p-7 mb-8 border border-[#212327]">
         <form onSubmit={handleSubmit} className="space-y-5">
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
             <div>
-              <label className="block text-xs font-mono tracking-widest text-slate-400 uppercase mb-2">
+              <label className="block eyebrow-mono text-[#7d8187] mb-2 text-[11px]">
                 YOUR USERNAME
               </label>
               <input
@@ -115,12 +115,12 @@ function ConnectContent() {
                 value={meInput}
                 onChange={(e) => setMeInput(e.target.value)}
                 placeholder="e.g. gaearon"
-                className="input-cognodb font-mono text-sm"
+                className="input-xai font-mono text-sm"
                 required
               />
             </div>
             <div>
-              <label className="block text-xs font-mono tracking-widest text-slate-400 uppercase mb-2">
+              <label className="block eyebrow-mono text-[#7d8187] mb-2 text-[11px]">
                 TARGET CONTRIBUTOR YOU WANT TO REACH
               </label>
               <input
@@ -128,32 +128,29 @@ function ConnectContent() {
                 value={targetInput}
                 onChange={(e) => setTargetInput(e.target.value)}
                 placeholder="e.g. jridgewell"
-                className="input-cognodb font-mono text-sm"
+                className="input-xai font-mono text-sm"
                 required
               />
             </div>
           </div>
 
-          <div className="flex flex-col sm:flex-row items-stretch sm:items-center justify-between gap-4 pt-2 border-t border-white/5">
-            <div className="flex flex-wrap items-center gap-2 text-xs text-slate-400">
-              <span className="text-slate-500 font-mono text-[11px] uppercase tracking-wider">SHORTCUTS:</span>
+          <div className="flex flex-col sm:flex-row items-stretch sm:items-center justify-between gap-4 pt-3 border-t border-[#212327]">
+            <div className="flex flex-wrap items-center gap-2 text-xs text-[#7d8187]">
+              <span className="eyebrow-mono text-[10px] text-[#7d8187]">{"// SHORTCUTS:"}</span>
               {QUICK_CONNECTS.map((c) => (
                 <button
                   key={`${c.me}-${c.target}`}
                   type="button"
                   onClick={() => handleShortcut(c.me, c.target)}
-                  className="px-3 py-1 rounded-full bg-white/5 hover:bg-[#22d3ee]/15 border border-white/15 hover:border-[#22d3ee]/50 text-xs text-slate-300 hover:text-[#22d3ee] font-mono transition-all shadow-sm"
+                  className="btn-xai-outline text-xs font-mono !py-1 !px-3"
                 >
                   @{c.me} ➔ @{c.target}
                 </button>
               ))}
             </div>
 
-            <button type="submit" className="btn-mint !rounded-full !px-5 !py-2 flex-shrink-0 shadow-lg">
-              <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z" />
-              </svg>
-              <span className="font-mono text-xs tracking-wider uppercase">FIND MUTUAL CONNECTORS</span>
+            <button type="submit" className="btn-xai-primary flex-shrink-0">
+              <span className="font-mono text-xs tracking-widest uppercase">FIND CONNECTORS</span>
             </button>
           </div>
         </form>
@@ -169,35 +166,35 @@ function ConnectContent() {
         >
           {(list) => (
             <div className="space-y-5">
-              <div className="flex items-center justify-between card-cognodb px-5 py-3.5 border border-[#22d3ee]/30">
-                <div className="text-xs sm:text-sm font-bold text-white font-mono uppercase tracking-wider">
-                  FOUND {list.length} MUTUAL BRIDGE {list.length === 1 ? "CONNECTOR" : "CONNECTORS"}
+              <div className="flex items-center justify-between card-xai px-5 py-3.5 border border-[#212327]">
+                <div className="eyebrow-mono text-white text-xs">
+                  {`// FOUND ${list.length} MUTUAL BRIDGE ${list.length === 1 ? "CONNECTOR" : "CONNECTORS"}`}
                 </div>
-                <div className="text-xs text-[#22d3ee] font-mono">
-                  @{meQuery} ➔ Mutuals ➔ @{targetQuery}
+                <div className="text-xs text-[#7d8187] font-mono">
+                  @{meQuery} ➔ MUTUALS ➔ @{targetQuery}
                 </div>
               </div>
 
               <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                 {list.map((connector) => (
-                  <div key={connector.login} className="card-cognodb p-5 flex items-center justify-between gap-4 group border border-white/10 shadow-lg hover:border-[#22d3ee]/40">
+                  <div key={connector.login} className="card-xai p-5 flex items-center justify-between gap-4 border border-[#212327]">
                     <div className="flex items-center gap-3.5 min-w-0">
                       <img
                         src={connector.avatarUrl}
                         alt={connector.name}
-                        className="w-12 h-12 rounded-full border border-white/20 object-cover flex-shrink-0 group-hover:scale-105 transition-transform"
+                        className="w-12 h-12 rounded-full border border-white/20 object-cover flex-shrink-0"
                       />
                       <div className="min-w-0">
                         <Link
                           href={`/person/${connector.login}`}
-                          className="font-bold text-sm text-white hover:text-[#22d3ee] transition-colors block truncate"
+                          className="font-normal text-sm text-white hover:underline block truncate"
                         >
                           {connector.name}
                         </Link>
-                        <div className="text-xs text-[#22d3ee] font-mono truncate">
+                        <div className="text-xs text-[#7d8187] font-mono truncate">
                           @{connector.login}
                         </div>
-                        <div className="text-[11px] text-slate-500 font-mono">
+                        <div className="text-[11px] text-[#7d8187] font-mono">
                           {connector.followers.toLocaleString()} GitHub followers
                         </div>
                       </div>
@@ -205,7 +202,7 @@ function ConnectContent() {
 
                     <Link
                       href={`/path?from=${meQuery}&to=${connector.login}`}
-                      className="btn-dark-secondary !rounded-full !px-3.5 !py-1.5 text-xs font-mono flex-shrink-0 hover:border-[#22d3ee]"
+                      className="btn-xai-outline !py-1 !px-3 text-xs font-mono flex-shrink-0"
                     >
                       VIEW PATH
                     </Link>

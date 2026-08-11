@@ -1,209 +1,150 @@
 @import "tailwindcss";
 
-/* ─── Official CognoDB Cloud Console Design System ─── */
+/* ─── xAI Design System Tokens (DESIGN.md) ─── */
 :root {
-  --bg-dark: #08090d;
-  --bg-card: #0e1017;
-  --bg-card-hover: #131520;
-  --border-subtle: rgba(255, 255, 255, 0.08);
-  --border-hover: rgba(34, 211, 238, 0.35);
-  --cyan-primary: #22d3ee;
-  --emerald-status: #34d399;
-  --text-main: #ffffff;
-  --text-muted: #94a3b8;
-  --text-subdued: #64748b;
+  --canvas: #0a0a0a;
+  --canvas-soft: #1a1c20;
+  --canvas-card: #191919;
+  --canvas-mid: #363a3f;
+  --hairline: #212327;
+  --hairline-light: rgba(255, 255, 255, 0.15);
+  
+  --ink: #ffffff;
+  --ink-hover: #fafaf7;
+  --body: #dadbdf;
+  --body-mid: #7d8187;
+  --mute: #7d8187;
+
+  --accent-sunset: #ff7a17;
+  --accent-sunset-soft: #ffc285;
+  --accent-dusk: #7c3aed;
+  --accent-twilight: #c4b5fd;
+  --accent-breeze: #a0c3ec;
 }
 
 html, body {
   overflow-x: hidden;
   max-width: 100vw;
   color-scheme: dark;
-  background-color: var(--bg-dark);
-  font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen, Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
+  background-color: var(--canvas);
+  color: var(--ink);
+  font-family: Inter, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  text-rendering: optimizeLegibility;
 }
 
 body {
-  background-image: 
-    radial-gradient(circle at 50% 0%, rgba(34, 211, 238, 0.04) 0%, transparent 45%);
-  background-attachment: fixed;
+  background-color: #0a0a0a;
 }
 
-/* ─── Grid Overlay ─── */
-.bg-mesh-grid {
-  background-size: 32px 32px;
-  background-image: 
-    linear-gradient(to right, rgba(255, 255, 255, 0.015) 1px, transparent 1px),
-    linear-gradient(to bottom, rgba(255, 255, 255, 0.015) 1px, transparent 1px);
-}
-
-/* ─── CognoDB Console Cards ─── */
-.card-cognodb {
-  background: var(--bg-card);
-  border: 1px solid var(--border-subtle);
-  border-radius: 12px;
-  transition: all 0.2s ease-in-out;
+/* ─── xAI Card Chrome ─── */
+.card-xai {
+  background: var(--canvas-card);
+  border: 1px solid var(--hairline);
+  border-radius: 8px;
+  transition: border-color 0.15s ease, background-color 0.15s ease;
   word-break: break-word;
 }
 
-.card-cognodb:hover {
-  background: var(--bg-card-hover);
-  border-color: var(--border-hover);
-  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.4), 0 0 16px rgba(34, 211, 238, 0.06);
+.card-xai:hover {
+  border-color: rgba(255, 255, 255, 0.3);
 }
 
-/* ─── CognoDB Cloud Primary Button (Cyan Mint with Dark Text) ─── */
-.btn-mint {
+/* ─── xAI Outline Pill Button ─── */
+.btn-xai-outline {
   display: inline-flex;
   align-items: center;
   justify-content: center;
   gap: 0.5rem;
-  padding: 0.55rem 1.15rem;
-  background: #22d3ee;
-  color: #08090d;
-  font-weight: 700;
-  font-size: 0.8125rem;
-  border-radius: 8px;
-  border: none;
-  cursor: pointer;
-  transition: all 0.15s ease;
-  box-shadow: 0 2px 8px rgba(34, 211, 238, 0.25);
-}
-
-.btn-mint:hover {
-  background: #06b6d4;
-  transform: translateY(-1px);
-  box-shadow: 0 4px 14px rgba(34, 211, 238, 0.35);
-}
-
-.btn-dark-secondary {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  gap: 0.5rem;
-  padding: 0.5rem 1rem;
-  background: rgba(255, 255, 255, 0.04);
+  padding: 0.5rem 1.25rem;
+  background: transparent;
   color: #ffffff;
-  font-weight: 600;
-  font-size: 0.8125rem;
-  border-radius: 8px;
-  border: 1px solid var(--border-subtle);
+  font-weight: 400;
+  font-size: 0.875rem;
+  border-radius: 9999px;
+  border: 1px solid rgba(255, 255, 255, 0.25);
   cursor: pointer;
   transition: all 0.15s ease;
 }
 
-.btn-dark-secondary:hover {
-  background: rgba(255, 255, 255, 0.08);
-  border-color: rgba(255, 255, 255, 0.18);
-  color: white;
+.btn-xai-outline:hover {
+  border-color: rgba(255, 255, 255, 0.6);
+  background: rgba(255, 255, 255, 0.05);
+  color: #ffffff;
 }
 
-/* ─── Inputs ─── */
-.input-cognodb {
+/* ─── xAI Filled Primary Pill Button ─── */
+.btn-xai-primary {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  padding: 0.5rem 1.25rem;
+  background: #ffffff;
+  color: #0a0a0a;
+  font-weight: 500;
+  font-size: 0.875rem;
+  border-radius: 9999px;
+  border: 1px solid #ffffff;
+  cursor: pointer;
+  transition: all 0.15s ease;
+}
+
+.btn-xai-primary:hover {
+  background: #fafaf7;
+  border-color: #fafaf7;
+}
+
+/* ─── xAI Text Inputs ─── */
+.input-xai {
   width: 100%;
   padding: 0.75rem 1rem;
-  background: #06070a;
-  border: 1px solid var(--border-subtle);
-  border-radius: 10px;
+  background: var(--canvas-soft);
+  border: 1px solid var(--hairline);
+  border-radius: 8px;
   color: #ffffff;
   font-size: 0.875rem;
+  font-weight: 400;
   outline: none;
-  transition: all 0.2s ease;
+  transition: border-color 0.15s ease;
 }
 
-.input-cognodb::placeholder {
-  color: #64748b;
+.input-xai::placeholder {
+  color: #7d8187;
 }
 
-.input-cognodb:focus {
-  border-color: #22d3ee;
-  box-shadow: 0 0 0 3px rgba(34, 211, 238, 0.12);
+.input-xai:focus {
+  border-color: rgba(255, 255, 255, 0.4);
 }
 
-/* ─── CognoDB Console Badges (Unified Single Accent Palette) ─── */
-.badge-mint {
-  display: inline-flex;
-  align-items: center;
-  gap: 0.375rem;
-  padding: 0.2rem 0.625rem;
+/* ─── GeistMono Section Eyebrow ─── */
+.eyebrow-mono {
+  font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
   font-size: 0.75rem;
-  font-weight: 600;
-  border-radius: 6px;
-  background: rgba(34, 211, 238, 0.08);
-  color: #22d3ee;
-  border: 1px solid rgba(34, 211, 238, 0.2);
-  white-space: nowrap;
+  font-weight: 400;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--ink);
 }
 
-.badge-cyan {
-  display: inline-flex;
-  align-items: center;
-  gap: 0.375rem;
-  padding: 0.2rem 0.625rem;
-  font-size: 0.75rem;
-  font-weight: 600;
-  border-radius: 6px;
-  background: rgba(34, 211, 238, 0.08);
-  color: #22d3ee;
-  border: 1px solid rgba(34, 211, 238, 0.2);
-  white-space: nowrap;
-}
-
-.badge-emerald {
-  display: inline-flex;
-  align-items: center;
-  gap: 0.375rem;
-  padding: 0.2rem 0.625rem;
-  font-size: 0.75rem;
-  font-weight: 600;
-  border-radius: 6px;
-  background: rgba(52, 211, 153, 0.08);
-  color: #34d399;
-  border: 1px solid rgba(52, 211, 153, 0.2);
-  white-space: nowrap;
-}
-
-.badge-indigo {
-  display: inline-flex;
-  align-items: center;
-  gap: 0.375rem;
-  padding: 0.2rem 0.625rem;
-  font-size: 0.75rem;
-  font-weight: 600;
-  border-radius: 6px;
-  background: rgba(34, 211, 238, 0.08);
-  color: #22d3ee;
-  border: 1px solid rgba(34, 211, 238, 0.2);
-  white-space: nowrap;
+/* ─── Containers ─── */
+.container-narrow {
+  width: 100%;
+  max-width: 76rem;
+  margin: 0 auto;
+  padding: 0 1.5rem;
 }
 
 /* ─── Loading Spinner ─── */
-.loading-spinner-mint {
-  width: 24px;
-  height: 24px;
-  border: 2px solid rgba(255, 255, 255, 0.1);
-  border-top-color: #22d3ee;
-  border-right-color: #34d399;
+.loading-spinner-white {
+  width: 20px;
+  height: 20px;
+  border: 2px solid rgba(255, 255, 255, 0.15);
+  border-top-color: #ffffff;
   border-radius: 50%;
   animation: spin 0.75s linear infinite;
 }
 
 @keyframes spin {
   to { transform: rotate(360deg); }
-}
-
-/* ─── Container ─── */
-.container-narrow {
-  width: 100%;
-  max-width: 76rem;
-  margin: 0 auto;
-  padding: 0 1rem;
-}
-
-@media (min-width: 640px) {
-  .container-narrow {
-    padding: 0 1.5rem;
-  }
 }

@@ -36,14 +36,14 @@ export default function LeaderboardPage() {
     <div className="container-narrow">
       {/* Header */}
       <div className="mb-8 max-w-2xl">
-        <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-[#22d3ee]/10 border border-[#22d3ee]/30 text-xs font-mono tracking-widest text-[#22d3ee] uppercase mb-4 shadow-[0_0_12px_rgba(34,211,238,0.15)]">
-          <span>DEGREE CENTRALITY RANKING</span>
+        <div className="eyebrow-mono text-[#7d8187] mb-3">
+          {"// DEGREE CENTRALITY RANKING"}
         </div>
-        <h1 className="text-3xl sm:text-5xl font-extrabold text-white mb-3 tracking-tight leading-none">
+        <h1 className="text-3xl sm:text-5xl font-normal text-white mb-3 tracking-[-0.03em] leading-tight">
           Most-Connected Maintainers
         </h1>
-        <p className="text-slate-400 text-xs sm:text-sm leading-relaxed font-normal">
-          Contributors ranked by the volume of unique co-authors they share across all 25 core open-source repositories in the connection graph.
+        <p className="text-[#dadbdf] text-sm leading-relaxed font-normal">
+          Contributors ranked by unique co-authors shared across all 25 core open-source repositories in the connection graph.
         </p>
       </div>
 
@@ -58,47 +58,20 @@ export default function LeaderboardPage() {
             {/* Top 3 Podium Cards */}
             {list.length >= 3 && (
               <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 sm:gap-6 items-stretch">
-                <PodiumCard
-                  rank={1}
-                  title="Rank #1 · Centrality Leader"
-                  person={list[0]}
-                  accentBg="bg-gradient-to-b from-amber-400/10 to-transparent"
-                  borderColor="border-amber-400/50 hover:border-amber-400 shadow-[0_0_20px_rgba(251,191,36,0.1)]"
-                  ringColor="border-amber-400"
-                  rankTag="bg-amber-400/15 text-amber-300 border-amber-400/40"
-                  badgeText="76 Direct Co-Authors"
-                />
-                <PodiumCard
-                  rank={2}
-                  title="Rank #2 · Network Core"
-                  person={list[1]}
-                  accentBg="bg-gradient-to-b from-slate-300/10 to-transparent"
-                  borderColor="border-slate-300/40 hover:border-slate-300 shadow-[0_0_20px_rgba(203,213,225,0.1)]"
-                  ringColor="border-slate-300"
-                  rankTag="bg-slate-300/15 text-slate-200 border-slate-300/40"
-                  badgeText="74 Direct Co-Authors"
-                />
-                <PodiumCard
-                  rank={3}
-                  title="Rank #3 · Network Core"
-                  person={list[2]}
-                  accentBg="bg-gradient-to-b from-amber-600/10 to-transparent"
-                  borderColor="border-amber-600/40 hover:border-amber-600 shadow-[0_0_20px_rgba(217,119,6,0.1)]"
-                  ringColor="border-amber-600"
-                  rankTag="bg-amber-600/15 text-amber-400 border-amber-600/40"
-                  badgeText="66 Direct Co-Authors"
-                />
+                <PodiumCard rank={1} title="Centrality Leader" person={list[0]} badgeText="76 Co-Authors" />
+                <PodiumCard rank={2} title="Network Core" person={list[1]} badgeText="74 Co-Authors" />
+                <PodiumCard rank={3} title="Network Core" person={list[2]} badgeText="66 Co-Authors" />
               </div>
             )}
 
             {/* Complete Rankings Table */}
             <div className="space-y-3">
-              <div className="flex items-center justify-between card-cognodb px-5 py-3.5 border border-[#22d3ee]/30">
-                <h2 className="text-xs font-bold text-white uppercase tracking-widest font-mono">
-                  COMPLETE NETWORK CENTRALITY RANKS (TOP 25)
+              <div className="flex items-center justify-between card-xai px-5 py-3.5 border border-[#212327]">
+                <h2 className="eyebrow-mono text-white text-xs">
+                  {"// COMPLETE NETWORK CENTRALITY RANKS (TOP 25)"}
                 </h2>
-                <div className="text-xs text-[#22d3ee] font-mono">
-                  Metric: Unique Co-Authorships
+                <div className="text-xs text-[#7d8187] font-mono">
+                  METRIC: UNIQUE CO-AUTHORSHIPS
                 </div>
               </div>
 
@@ -107,38 +80,28 @@ export default function LeaderboardPage() {
                 return (
                   <div
                     key={person.login}
-                    className="card-cognodb p-4.5 flex flex-col sm:flex-row sm:items-center justify-between gap-4 group border border-white/10 hover:border-[#22d3ee]/40 shadow-md"
+                    className="card-xai p-4.5 flex flex-col sm:flex-row sm:items-center justify-between gap-4 border border-[#212327]"
                   >
                     {/* Left: Rank, Avatar & Info */}
                     <div className="flex items-center gap-3.5 min-w-0 sm:w-2/5">
-                      <div
-                        className={`w-8 h-8 rounded-full flex items-center justify-center font-bold text-xs flex-shrink-0 border font-mono ${
-                          index === 0
-                            ? "bg-amber-400/20 text-amber-300 border-amber-400/40"
-                            : index === 1
-                            ? "bg-slate-300/20 text-slate-200 border-slate-300/40"
-                            : index === 2
-                            ? "bg-amber-600/20 text-amber-400 border-amber-600/40"
-                            : "bg-white/5 text-slate-400 border-white/10"
-                        }`}
-                      >
+                      <div className="w-8 h-8 rounded-full border border-white/20 flex items-center justify-center font-mono text-xs text-white flex-shrink-0 bg-[#1a1c20]">
                         #{index + 1}
                       </div>
 
                       <img
                         src={person.avatarUrl}
                         alt={person.name}
-                        className="w-10 h-10 rounded-full object-cover border border-white/20 flex-shrink-0 group-hover:scale-105 transition-transform"
+                        className="w-10 h-10 rounded-full object-cover border border-white/20 flex-shrink-0"
                       />
 
                       <div className="min-w-0 flex-1">
                         <Link
                           href={`/person/${person.login}`}
-                          className="font-bold text-sm text-white hover:text-[#22d3ee] transition-colors block truncate"
+                          className="font-normal text-sm text-white hover:underline block truncate"
                         >
                           {person.name}
                         </Link>
-                        <div className="text-xs text-[#22d3ee] font-mono truncate">
+                        <div className="text-xs text-[#7d8187] font-mono truncate">
                           @{person.login} {person.company ? `· ${person.company}` : ""}
                         </div>
                       </div>
@@ -146,30 +109,30 @@ export default function LeaderboardPage() {
 
                     {/* Center: Centrality Score Bar */}
                     <div className="flex-1 max-w-xs w-full">
-                      <div className="flex justify-between items-center text-[10px] font-mono text-slate-400 mb-1">
-                        <span>CENTRALITY RATING</span>
-                        <span className="text-[#22d3ee] font-bold">{percent}%</span>
+                      <div className="flex justify-between items-center text-[10px] font-mono text-[#7d8187] mb-1">
+                        <span>CENTRALITY</span>
+                        <span className="text-white font-normal">{percent}%</span>
                       </div>
-                      <div className="w-full bg-white/5 rounded-full h-2 overflow-hidden border border-white/5">
+                      <div className="w-full bg-[#1a1c20] rounded-full h-1.5 overflow-hidden border border-[#212327]">
                         <div
-                          className="bg-gradient-to-r from-[#22d3ee] to-[#34d399] h-full rounded-full transition-all duration-500"
+                          className="bg-white h-full rounded-full transition-all duration-500"
                           style={{ width: `${percent}%` }}
                         />
                       </div>
                     </div>
 
                     {/* Right: Metrics & Action */}
-                    <div className="flex items-center justify-between sm:justify-end gap-4 flex-shrink-0 pt-2 sm:pt-0 border-t sm:border-0 border-white/5">
+                    <div className="flex items-center justify-between sm:justify-end gap-4 flex-shrink-0 pt-2 sm:pt-0 border-t sm:border-0 border-[#212327]">
                       <div className="text-left sm:text-right font-mono">
-                        <div className="text-sm font-bold text-[#22d3ee]">
+                        <div className="text-sm font-normal text-white">
                           {person.connections}
                         </div>
-                        <div className="text-[10px] text-slate-500 uppercase tracking-wider font-medium">
+                        <div className="text-[10px] text-[#7d8187] uppercase tracking-widest">
                           CO-AUTHORS
                         </div>
                       </div>
 
-                      <Link href={`/person/${person.login}`} className="btn-dark-secondary !rounded-full !px-4 !py-1.5 text-xs font-mono">
+                      <Link href={`/person/${person.login}`} className="btn-xai-outline !py-1 !px-3.5 text-xs font-mono">
                         PROFILE
                       </Link>
                     </div>
@@ -188,36 +151,28 @@ function PodiumCard({
   rank,
   title,
   person,
-  accentBg,
-  borderColor,
-  ringColor,
-  rankTag,
   badgeText,
 }: {
   rank: number;
   title: string;
   person: LeaderboardEntry;
-  accentBg: string;
-  borderColor: string;
-  ringColor: string;
-  rankTag: string;
   badgeText: string;
 }) {
   return (
-    <div className={`card-cognodb p-6 border ${borderColor} ${accentBg} flex flex-col items-center justify-between text-center relative overflow-hidden group shadow-xl`}>
+    <div className="card-xai p-6 border border-[#212327] flex flex-col items-center justify-between text-center relative overflow-hidden">
       {/* Rank Badge Header */}
-      <div className={`px-3.5 py-1 rounded-full text-xs font-bold font-mono border ${rankTag} mb-4 flex items-center gap-1.5`}>
-        <span>#{rank} {rankTag.includes("amber-400") ? "Gold" : rankTag.includes("slate") ? "Silver" : "Bronze"}</span>
+      <div className="btn-xai-outline !py-1 !px-3 text-xs font-mono mb-4 flex items-center gap-1.5 text-white">
+        <span>#{rank} RANK</span>
         <span>·</span>
         <span>{badgeText}</span>
       </div>
 
-      {/* Maintainer Avatar with Ring */}
+      {/* Maintainer Avatar */}
       <div className="relative mb-4">
         <img
           src={person.avatarUrl}
           alt={person.name}
-          className={`w-20 h-20 rounded-full border-2 ${ringColor} object-cover group-hover:scale-105 transition-transform shadow-lg`}
+          className="w-20 h-20 rounded-full border border-white/30 object-cover"
         />
       </div>
 
@@ -225,27 +180,27 @@ function PodiumCard({
       <div className="mb-4 w-full">
         <Link
           href={`/person/${person.login}`}
-          className="font-extrabold text-base sm:text-lg text-white hover:text-[#22d3ee] transition-colors truncate block"
+          className="font-normal text-lg text-white hover:underline truncate block"
         >
           {person.name}
         </Link>
-        <div className="text-xs text-[#22d3ee] font-mono truncate">
-          @{person.login} · <span className="text-slate-500 font-sans">{title}</span>
+        <div className="text-xs text-[#7d8187] font-mono truncate">
+          @{person.login} · <span className="font-sans text-[#dadbdf]">{title}</span>
         </div>
       </div>
 
       {/* Metric Box */}
-      <div className="w-full bg-white/5 rounded-2xl p-3.5 border border-white/10 mb-4">
-        <div className="text-2xl font-black text-[#22d3ee] font-mono mb-0.5">
+      <div className="w-full bg-[#1a1c20] rounded-md p-3 border border-[#212327] mb-4">
+        <div className="text-2xl font-normal text-white font-mono mb-0.5">
           {person.connections}
         </div>
-        <div className="text-[10px] text-slate-400 font-bold uppercase tracking-widest font-mono">
+        <div className="eyebrow-mono text-[10px] text-[#7d8187]">
           DIRECT CO-AUTHORS
         </div>
       </div>
 
       {/* Action Button */}
-      <Link href={`/person/${person.login}`} className="btn-dark-secondary !rounded-full !py-2 text-xs font-mono w-full text-center hover:border-[#22d3ee]">
+      <Link href={`/person/${person.login}`} className="btn-xai-outline !py-1.5 text-xs font-mono w-full text-center">
         EXPLORE NETWORK
       </Link>
     </div>

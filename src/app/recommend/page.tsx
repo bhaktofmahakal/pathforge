@@ -16,7 +16,7 @@ const QUICK_MAINTAINERS = [
 
 export default function RecommendPage() {
   return (
-    <Suspense fallback={<div className="container-narrow py-12 text-center text-slate-400 text-sm font-mono">Loading recommendations…</div>}>
+    <Suspense fallback={<div className="container-narrow py-12 text-center text-[#7d8187] text-sm font-mono">{"// LOADING RECOMMENDATIONS..."}</div>}>
       <RecommendContent />
     </Suspense>
   );
@@ -76,23 +76,23 @@ function RecommendContent() {
   return (
     <div className="container-narrow">
       {/* Header */}
-      <div className="mb-6 sm:mb-8 max-w-2xl">
-        <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-[#22d3ee]/10 border border-[#22d3ee]/30 text-xs font-mono tracking-widest text-[#22d3ee] uppercase mb-4 shadow-[0_0_12px_rgba(34,211,238,0.15)]">
-          <span>GRAPH TOPOLOGY RECOMMENDATION</span>
+      <div className="mb-8 max-w-2xl">
+        <div className="eyebrow-mono text-[#7d8187] mb-3">
+          {"// GRAPH TOPOLOGY RECOMMENDATION"}
         </div>
-        <h1 className="text-3xl sm:text-5xl font-extrabold text-white mb-3 tracking-tight leading-none">
+        <h1 className="text-3xl sm:text-5xl font-normal text-white mb-3 tracking-[-0.03em] leading-tight">
           Repo Recommendations
         </h1>
-        <p className="text-slate-400 text-xs sm:text-sm leading-relaxed font-normal">
+        <p className="text-[#dadbdf] text-sm leading-relaxed font-normal">
           Discover open-source repositories recommended based on the 1..2 hop network collaboration graph around you.
         </p>
       </div>
 
       {/* Input Form */}
-      <div className="card-cognodb p-6 sm:p-7 mb-8 max-w-xl border border-white/10 shadow-2xl">
+      <div className="card-xai p-6 sm:p-7 mb-8 max-w-xl border border-[#212327]">
         <form onSubmit={handleSubmit} className="space-y-5">
           <div>
-            <label className="block text-xs font-mono tracking-widest text-slate-400 uppercase mb-2">
+            <label className="block eyebrow-mono text-[#7d8187] mb-2 text-[11px]">
               CONTRIBUTOR USERNAME
             </label>
             <input
@@ -100,31 +100,28 @@ function RecommendContent() {
               value={loginInput}
               onChange={(e) => setLoginInput(e.target.value)}
               placeholder="e.g. eps1lon"
-              className="input-cognodb font-mono text-sm"
+              className="input-xai font-mono text-sm"
               required
             />
           </div>
 
-          <div className="flex flex-col sm:flex-row items-stretch sm:items-center justify-between gap-4 pt-2 border-t border-white/5">
-            <div className="flex flex-wrap items-center gap-2 text-xs text-slate-400">
-              <span className="text-slate-500 font-mono text-[11px] uppercase tracking-wider">SHORTCUTS:</span>
+          <div className="flex flex-col sm:flex-row items-stretch sm:items-center justify-between gap-4 pt-3 border-t border-[#212327]">
+            <div className="flex flex-wrap items-center gap-2 text-xs text-[#7d8187]">
+              <span className="eyebrow-mono text-[10px] text-[#7d8187]">{"// SHORTCUTS:"}</span>
               {QUICK_MAINTAINERS.map((m) => (
                 <button
                   key={m.login}
                   type="button"
                   onClick={() => handleShortcut(m.login)}
-                  className="px-3 py-1 rounded-full bg-white/5 hover:bg-[#22d3ee]/15 border border-white/15 hover:border-[#22d3ee]/50 text-xs text-slate-300 hover:text-[#22d3ee] font-mono transition-all shadow-sm"
+                  className="btn-xai-outline text-xs font-mono !py-1 !px-3"
                 >
                   @{m.login}
                 </button>
               ))}
             </div>
 
-            <button type="submit" className="btn-mint !rounded-full !px-5 !py-2 flex-shrink-0 shadow-lg">
-              <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 10V3L4 14h7v7l9-11h-7z" />
-              </svg>
-              <span className="font-mono text-xs tracking-wider uppercase">GET RECOMMENDATIONS</span>
+            <button type="submit" className="btn-xai-primary flex-shrink-0">
+              <span className="font-mono text-xs tracking-widest uppercase">RECOMMEND REPOS</span>
             </button>
           </div>
         </form>
@@ -140,47 +137,44 @@ function RecommendContent() {
         >
           {(list) => (
             <div className="space-y-5">
-              <div className="flex items-center justify-between card-cognodb px-5 py-3.5 border border-[#22d3ee]/30">
-                <div className="text-xs sm:text-sm font-bold text-white font-mono uppercase tracking-wider">
-                  RECOMMENDED REPOSITORIES FOR @{loginQuery} ({list.length})
+              <div className="flex items-center justify-between card-xai px-5 py-3.5 border border-[#212327]">
+                <div className="eyebrow-mono text-white text-xs">
+                  {`// RECOMMENDED REPOSITORIES FOR @${loginQuery} (${list.length})`}
                 </div>
-                <div className="text-xs text-[#22d3ee] font-mono">
-                  Network Path Depth: 1..2 hops
+                <div className="text-xs text-[#7d8187] font-mono">
+                  DEPTH: 1..2 HOPS
                 </div>
               </div>
 
               <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                 {list.map((repo) => (
-                  <div key={repo.fullName} className="card-cognodb p-6 flex flex-col justify-between group border border-white/10 shadow-lg hover:border-[#22d3ee]/40">
+                  <div key={repo.fullName} className="card-xai p-6 flex flex-col justify-between border border-[#212327]">
                     <div>
                       <div className="flex items-center justify-between gap-2 mb-3">
                         <a
                           href={repo.url}
                           target="_blank"
                           rel="noopener noreferrer"
-                          className="font-bold text-white hover:text-[#22d3ee] transition-colors text-sm sm:text-base break-all"
+                          className="font-normal text-white hover:underline text-base break-all"
                         >
                           {repo.fullName}
                         </a>
-                        <span className="px-2.5 py-0.5 rounded-full text-[10px] font-mono tracking-widest text-[#22d3ee] bg-[#22d3ee]/10 border border-[#22d3ee]/30 uppercase">
+                        <span className="btn-xai-outline !py-0.5 !px-2.5 text-[10px] font-mono uppercase text-[#dadbdf]">
                           {repo.primaryLanguage}
                         </span>
                       </div>
 
-                      <p className="text-xs text-slate-400 line-clamp-2 mb-4 leading-relaxed font-normal">
+                      <p className="text-xs text-[#dadbdf] line-clamp-2 mb-4 leading-relaxed font-normal">
                         {repo.description || "No description available."}
                       </p>
                     </div>
 
-                    <div className="flex items-center justify-between text-xs border-t border-white/5 pt-3.5 mt-2">
-                      <span className="flex items-center gap-1.5 text-amber-300 font-bold font-mono">
-                        <svg className="w-3.5 h-3.5 fill-amber-300" viewBox="0 0 20 20">
-                          <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
-                        </svg>
-                        {repo.stars.toLocaleString()} stars
+                    <div className="flex items-center justify-between text-xs border-t border-[#212327] pt-3.5 mt-2">
+                      <span className="font-mono text-white text-xs">
+                        ★ {repo.stars.toLocaleString()} stars
                       </span>
-                      <span className="text-[#22d3ee] font-mono font-bold">
-                        Network Strength: {repo.strength}
+                      <span className="text-[#7d8187] font-mono text-xs">
+                        NETWORK STRENGTH: {repo.strength}
                       </span>
                     </div>
                   </div>
