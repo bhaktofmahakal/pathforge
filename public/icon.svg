@@ -1,0 +1,10 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32" width="32" height="32" fill="none">
+  <rect width="32" height="32" rx="16" fill="#0a0a0a" stroke="#ffffff" stroke-opacity="0.3" stroke-width="1.5"/>
+  {/* Graph Connection Edges */}
+  <path d="M10 22 L16 10 L22 22 L10 22 Z" stroke="#ffffff" stroke-width="1.5" stroke-linejoin="round" stroke-opacity="0.8"/>
+  <path d="M16 10 L16 22" stroke="#ffffff" stroke-width="1.2" stroke-dasharray="2 2" stroke-opacity="0.5"/>
+  {/* Graph Nodes */}
+  <circle cx="16" cy="10" r="2.5" fill="#ffffff"/>
+  <circle cx="10" cy="22" r="2.5" fill="#ffffff"/>
+  <circle cx="22" cy="22" r="2.5" fill="#ffffff"/>
+</svg>
