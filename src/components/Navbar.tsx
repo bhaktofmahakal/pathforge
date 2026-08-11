@@ -55,7 +55,7 @@ export function Navbar() {
 
         {/* Right: Clean GitHub Link */}
         <a
-          href="https://github.com"
+          href="https://github.com/bhaktofmahakal/pathforge"
           target="_blank"
           rel="noopener noreferrer"
           className="hidden sm:inline-flex items-center gap-1.5 text-xs text-slate-300 hover:text-white transition-colors bg-white/5 hover:bg-white/10 px-3 py-1.5 rounded-lg border border-white/10"
