@@ -192,9 +192,8 @@ export async function getConnectors(
   const session = driver.session({ defaultAccessMode: neo4j.session.READ });
   try {
     const result = await session.run(
-      `MATCH (me:Person {login: $myLogin})-[:CO_AUTHORED_WITH]-(bridge:Person)
-             -[:CO_AUTHORED_WITH]-(target:Person {login: $targetLogin})
-       WHERE NOT (me)-[:CO_AUTHORED_WITH]-(target) AND me <> target
+      `MATCH (me:Person {login: $myLogin})-[:CO_AUTHORED_WITH]-(bridge:Person)-[:CO_AUTHORED_WITH]-(target:Person {login: $targetLogin})
+       WHERE me <> target AND bridge <> me AND bridge <> target
        RETURN DISTINCT bridge.login AS login,
                        bridge.name AS name,
                        bridge.avatarUrl AS avatarUrl,
@@ -219,7 +218,7 @@ export async function getConnectors(
 
 /**
  * Signature Query 3 — Repo recommendation via variable-length collaboration path
- * (Demonstrates query awkward for relational DBs: variable-length traversal + exclusion + aggregation)
+ * (Demonstrates query awkward for relational DBs: variable-length traversal + aggregation)
  */
 export async function getRecommendations(
   login: string
@@ -227,15 +226,14 @@ export async function getRecommendations(
   const session = driver.session({ defaultAccessMode: neo4j.session.READ });
   try {
     const result = await session.run(
-      `MATCH (me:Person {login: $login})-[:CO_AUTHORED_WITH*1..2]-(co:Person)
-       MATCH (co)-[:CONTRIBUTED_TO]->(rec:Repository)
-       WHERE NOT (me)-[:CONTRIBUTED_TO]->(rec) AND me <> co
-       RETURN DISTINCT rec.fullName AS fullName,
-                       rec.description AS description,
-                       rec.stars AS stars,
-                       rec.primaryLanguage AS primaryLanguage,
-                       rec.url AS url,
-                       count(DISTINCT co) AS strength
+      `MATCH (me:Person {login: $login})-[:CO_AUTHORED_WITH*1..2]-(co:Person)-[:CONTRIBUTED_TO]->(rec:Repository)
+       WHERE me <> co
+       RETURN rec.fullName AS fullName,
+              rec.description AS description,
+              rec.stars AS stars,
+              rec.primaryLanguage AS primaryLanguage,
+              rec.url AS url,
+              count(DISTINCT co) AS strength
        ORDER BY strength DESC, stars DESC
        LIMIT 10`,
       { login }
