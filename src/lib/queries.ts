@@ -1,6 +1,19 @@
 import driver from "./db";
 import neo4j, { Integer, Path as Neo4jPath } from "neo4j-driver";
 
+/* ─── Helper: Robust Integer Parser ─── */
+function toNum(val: unknown, fallback = 0): number {
+  if (typeof val === "number") return val;
+  if (val && typeof (val as Integer).toNumber === "function") {
+    return (val as Integer).toNumber();
+  }
+  if (typeof val === "string") {
+    const parsed = parseInt(val, 10);
+    return isNaN(parsed) ? fallback : parsed;
+  }
+  return fallback;
+}
+
 /* ─── Interfaces ─── */
 
 export interface PersonNode {
@@ -107,7 +120,7 @@ export async function getShortestPath(
     if (result.records.length === 0) return null;
 
     const record = result.records[0];
-    const hops = (record.get("hops") as Integer).toNumber();
+    const hops = toNum(record.get("hops"));
     const rawPath = record.get("path") as Neo4jPath;
 
     const nodesMap = new Map<string, PathNode>();
@@ -150,10 +163,7 @@ export async function getShortestPath(
         avatarUrl: String(endProps.avatarUrl || ""),
       };
 
-      const sharedRepos =
-        typeof relProps.sharedRepos === "number"
-          ? relProps.sharedRepos
-          : (relProps.sharedRepos as Integer)?.toNumber?.() ?? 1;
+      const sharedRepos = toNum(relProps.sharedRepos, 1);
 
       links.push({
         source: fromNode.login,
@@ -207,7 +217,7 @@ export async function getConnectors(
       login: record.get("login"),
       name: record.get("name") || record.get("login"),
       avatarUrl: record.get("avatarUrl") || `https://github.com/${record.get("login")}.png`,
-      followers: (record.get("followers") as Integer)?.toNumber?.() ?? 0,
+      followers: toNum(record.get("followers")),
     }));
   } finally {
     await session.close();
@@ -218,7 +228,6 @@ export async function getConnectors(
 
 /**
  * Signature Query 3 — Repo recommendation via variable-length collaboration path
- * (Demonstrates query awkward for relational DBs: variable-length traversal + aggregation)
  */
 export async function getRecommendations(
   login: string
@@ -242,10 +251,10 @@ export async function getRecommendations(
     return result.records.map((record) => ({
       fullName: record.get("fullName"),
       description: record.get("description") || "",
-      stars: (record.get("stars") as Integer)?.toNumber?.() ?? 0,
+      stars: toNum(record.get("stars")),
       primaryLanguage: record.get("primaryLanguage") || "TypeScript",
       url: record.get("url") || `https://github.com/${record.get("fullName")}`,
-      strength: (record.get("strength") as Integer)?.toNumber?.() ?? 0,
+      strength: toNum(record.get("strength")),
     }));
   } finally {
     await session.close();
@@ -277,7 +286,7 @@ export async function getLeaderboard(limit = 20): Promise<LeaderboardEntry[]> {
       name: record.get("name") || record.get("login"),
       avatarUrl: record.get("avatarUrl") || `https://github.com/${record.get("login")}.png`,
       company: record.get("company") || "",
-      connections: (record.get("connections") as Integer)?.toNumber?.() ?? 0,
+      connections: toNum(record.get("connections")),
     }));
   } finally {
     await session.close();
@@ -330,10 +339,10 @@ export async function getPersonProfile(login: string): Promise<PersonProfile | n
         name: String(repo.name || repo.fullName),
         description: String(repo.description || ""),
         url: String(repo.url || ""),
-        stars: (repo.stars as Integer)?.toNumber?.() ?? Number(repo.stars || 0),
+        stars: toNum(repo.stars),
         primaryLanguage: String(repo.primaryLanguage || "TypeScript"),
         topics: Array.isArray(repo.topics) ? repo.topics.map(String) : [],
-        commits: (repo.commits as Integer)?.toNumber?.() ?? Number(repo.commits || 1),
+        commits: toNum(repo.commits, 1),
       }));
 
     const topCollaborators = rawCollabs
@@ -342,7 +351,7 @@ export async function getPersonProfile(login: string): Promise<PersonProfile | n
         login: String(collab.login),
         name: String(collab.name || collab.login),
         avatarUrl: String(collab.avatarUrl || `https://github.com/${collab.login}.png`),
-        sharedRepos: (collab.sharedRepos as Integer)?.toNumber?.() ?? Number(collab.sharedRepos || 1),
+        sharedRepos: toNum(collab.sharedRepos, 1),
       }));
 
     return {
@@ -352,7 +361,7 @@ export async function getPersonProfile(login: string): Promise<PersonProfile | n
       bio: String(pProps.bio || ""),
       company: String(pProps.company || ""),
       location: String(pProps.location || ""),
-      followers: (pProps.followers as Integer)?.toNumber?.() ?? Number(pProps.followers || 0),
+      followers: toNum(pProps.followers),
       githubUrl: String(pProps.githubUrl || `https://github.com/${pProps.login}`),
       contributedRepos,
       topCollaborators,
